@@ -168,8 +168,10 @@ public class ThirdPersonCamera : MonoBehaviour
 			Debug.LogError("Parent camera to empty GameObject.", this);
 		}
 		
-		follow = GameObject.FindWithTag("Player").GetComponent<CharacterControllerLogic>();
-		followXform = GameObject.FindWithTag("Player").transform;
+		if(follow == null)
+			follow = GameObject.FindWithTag("Player").GetComponent<CharacterControllerLogic>();
+		if(followXform == null)
+			followXform = GameObject.FindWithTag("Player").transform;
 		
 		lookDir = followXform.forward;
 		curLookDir = followXform.forward;
@@ -214,8 +216,8 @@ public class ThirdPersonCamera : MonoBehaviour
 //		float rightY = Input.GetAxis("RightStickY");
 		float rightX = 0;
 		float rightY = 0;
-		float leftX = Input.GetAxis("Horizontal");
-		float leftY = Input.GetAxis("Vertical");	
+		float leftX = Input.GetAxis("Horizontal" + follow.myControl.ToString());
+		float leftY = Input.GetAxis("Vertical" + follow.myControl.ToString());	
 		
 		Vector3 characterOffset = followXform.position + new Vector3(0f, distanceUp, 0f);
 		Vector3 lookAt = characterOffset;

@@ -30,6 +30,15 @@ public class CharacterControllerLogic : MonoBehaviour
 {
 	#region Variables (private)
 	
+	public enum ControlMethod{
+		Arrows,
+		WASD,
+		JIKL,
+		Joystick
+	}
+	
+	public ControlMethod myControl;
+	
 	// Inspector serialized
 	[SerializeField]
 	private Animator animator;
@@ -135,18 +144,18 @@ public class CharacterControllerLogic : MonoBehaviour
 			transInfo = animator.GetAnimatorTransitionInfo(0);
 			
 			// Press A to jump
-			if (Input.GetButton("Jump"))
-			{
-				animator.SetBool("Jump", true);
-			}
-			else
-			{
-				animator.SetBool("Jump", false);
-			}	
+//			if (Input.GetButton("Jump"))
+//			{
+//				animator.SetBool("Jump", true);
+//			}
+//			else
+//			{
+//				animator.SetBool("Jump", false);
+//			}	
 			
 			// Pull values from controller/keyboard
-			leftX = Input.GetAxis("Horizontal");
-			leftY = Input.GetAxis("Vertical");			
+			leftX = Input.GetAxis("Horizontal" + myControl.ToString());
+			leftY = Input.GetAxis("Vertical" + myControl.ToString());			
 			
 			charAngle = 0f;
 			direction = 0f;	
